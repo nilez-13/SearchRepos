@@ -103,7 +103,9 @@ const Search = () => {
       </div>
 
       {status === "found" && (
-        <div className="border-b-2 flex items-end  py-2">
+        <div
+          className={`bg-black border-b-2 flex items-end z-10 py-2 ${styles.sticky}`}
+        >
           <div className="mt-2 mx-4 flex items-end justify-start gap-4">
             <div>Sort by</div>
             <div className="grid grid-cols-4 gap-4">
@@ -173,13 +175,16 @@ const Search = () => {
               </div>
             </div>
           ) : (
-            <div
-              className={`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-4 mt-10`}
-            >
-              {data.map((each) => (
-                <Card data={each} key={each.id} />
-              ))}
-            </div>
+            <>
+              <div
+                className={`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-4 mt-10`}
+              >
+                {data.map((each) => (
+                  <Card data={each} key={each.id} />
+                ))}
+              </div>
+              <div className="border-2 rounded mt-10 h-10">Pagination</div>
+            </>
           )}
         </>
       ) : (

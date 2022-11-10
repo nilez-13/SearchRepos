@@ -9,17 +9,17 @@ const Card = ({ data }) => {
     <div className="text-xl bg-gray-600  rounded  px-2 pt-4">
       <div className="flex justify-between border-b-2">
         <span className="font-bold text-xl truncate hover:text-clip">
-          {data.name}
+          <a href={data.html_url}>{data.name}</a>
         </span>
 
-        <div className="flex justify-start">
+        <a href={data.owner.html_url} className="flex justify-start">
           <div className="">
             <FaUserEdit className="text-xl" />
           </div>
           <div className="ml-4 flex flex-wrap text-sm truncate hover:text-clip">
             <span className="">{data.owner.login}</span>
           </div>
-        </div>
+        </a>
       </div>
       <div className="mt-4 ml-4 text-sm h-24">
         <p>{data.description}</p>

@@ -14,7 +14,7 @@ const Header = () => {
 
   return status === "found" ? (
     <header
-      className="sticky top-0 z-50 h-10  border-b-2 flex justify-center cursor-pointer"
+      className="sticky top-0 z-50 h-10  border-b-2 flex justify-center cursor-pointer bg-black"
       onClick={handleClear}
     >
       <span className="  px-4 py-2">

@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import { FaSearch } from "react-icons/fa";
+import {
+  FaSearch,
+  FaSortAmountDown,
+  FaSortAmountUpAlt,
+  FaStar,
+} from "react-icons/fa";
+import { GoRepoForked, GoHistory } from "react-icons/go";
+
 import { useSelector, useDispatch } from "react-redux";
 import Card from "./Card";
 import Loader from "./Skeleton";
@@ -11,10 +18,11 @@ import {
   selectRepos,
   selectLoading,
   selectStaus,
+  clearSearch,
+  filterRepos,
 } from "./searchSlice";
 
 import styles from "./search.module.css";
-import Skeleton from "react-loading-skeleton";
 
 const Search = () => {
   const data = useSelector(selectData);
@@ -25,15 +33,41 @@ const Search = () => {
 
   const [search, setSearch] = useState("");
 
+  const [sort, setSort] = useState("stars");
+  const [order, setOrder] = useState("desc");
+
   const handleSearch = (event) => {
     event.preventDefault();
     if (search.trim() !== "") {
-      dispatch(loadRepos(search));
+      dispatch(loadRepos({ search }));
     }
   };
 
+  useEffect(() => {
+    if (search.trim() !== "") {
+      dispatch(filterRepos({ search, sort, order }));
+    }
+  }, [sort, order]);
+
   const handleChange = (event) => {
     setSearch(event.target.value);
+  };
+
+  const handleClear = () => {
+    setSearch("");
+    dispatch(clearSearch());
+  };
+
+  const handleSort = (value) => {
+    setSort(value);
+  };
+
+  const handleOrder = () => {
+    if (order === "desc") {
+      setOrder("asc");
+    } else {
+      setOrder("desc");
+    }
   };
 
   return (
@@ -68,14 +102,86 @@ const Search = () => {
         </div>
       </div>
 
-      {!loading ? (
-        <div
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 mt-10`}
-        >
-          {data.map((each) => (
-            <Card data={each} key={each.id} />
-          ))}
+      {status === "found" && (
+        <div className="border-b-2 flex items-end  py-2">
+          <div className="mt-2 mx-4 flex items-end justify-start gap-4">
+            <div>Sort by</div>
+            <div className="grid grid-cols-4 gap-4">
+              <button
+                className={`${styles.sortButton}  `}
+                onClick={() => handleSort("stars")}
+              >
+                <FaStar
+                  className={`${
+                    sort === "stars"
+                      ? "text-blue-400 pb-1 border-b-2 border-blue-400"
+                      : ""
+                  }`}
+                />
+              </button>
+
+              <button
+                className={`${styles.sortButton}`}
+                onClick={() => handleSort("forks")}
+              >
+                <GoRepoForked
+                  className={`${
+                    sort === "forks"
+                      ? "text-blue-400 pb-1 border-b-2 border-blue-400"
+                      : ""
+                  }`}
+                />
+              </button>
+
+              <button
+                className={`${styles.sortButton}`}
+                onClick={() => handleSort("updated")}
+              >
+                <GoHistory
+                  className={`${
+                    sort === "updated"
+                      ? "text-blue-400 pb-1 border-b-2 border-blue-400"
+                      : ""
+                  }`}
+                />
+              </button>
+              <button className={`${styles.sortButton}`} onClick={handleOrder}>
+                {order === "desc" ? (
+                  <FaSortAmountDown />
+                ) : (
+                  <FaSortAmountUpAlt />
+                )}
+              </button>
+            </div>
+          </div>
         </div>
+      )}
+
+      {!loading ? (
+        <>
+          {status === "notfound" ? (
+            <div className="flex justify-center mt-10">
+              <div className={styles.warningbox}>
+                <p>No Repo found with with search term</p>
+
+                <p
+                  className="underline cursor-pointer text-white text-xs"
+                  onClick={handleClear}
+                >
+                  Clear Search
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div
+              className={`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-4 mt-10`}
+            >
+              {data.map((each) => (
+                <Card data={each} key={each.id} />
+              ))}
+            </div>
+          )}
+        </>
       ) : (
         <Loader />
       )}

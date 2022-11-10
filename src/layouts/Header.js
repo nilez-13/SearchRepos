@@ -14,13 +14,13 @@ const Header = () => {
 
   return status === "found" ? (
     <header
-      className="sticky top-0 z-50 h-10  border-b-2 flex justify-center cursor-pointer bg-black"
+      className="sticky top-0 z-50   text-4xl flex justify-center cursor-pointer bg-black"
       onClick={handleClear}
     >
       <span className="  px-4 py-2">
         <FaHome className="mt-1" />
       </span>
-      <span className="text-xl font-bold ml-4  py-2">GitHub Repo Search</span>
+      <span className=" font-bold ml-4  py-2">GitHub Repo Search</span>
     </header>
   ) : null;
 };

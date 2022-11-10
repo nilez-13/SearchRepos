@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <div>
-        {false && <Header />}
+        <Header />
         <div className="relative my-10 px-4">
           <Routes>
             <Route path="*" element={<Search />} />

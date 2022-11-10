@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "./Card";
+import Loader from "./Skeleton";
 
 import {
   loadRepos,
@@ -13,6 +14,7 @@ import {
 } from "./searchSlice";
 
 import styles from "./search.module.css";
+import Skeleton from "react-loading-skeleton";
 
 const Search = () => {
   const data = useSelector(selectData);
@@ -66,7 +68,7 @@ const Search = () => {
         </div>
       </div>
 
-      {!loading && (
+      {!loading ? (
         <div
           className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 mt-10`}
         >
@@ -74,6 +76,8 @@ const Search = () => {
             <Card data={each} key={each.id} />
           ))}
         </div>
+      ) : (
+        <Loader />
       )}
     </>
   );

@@ -110,7 +110,7 @@ const Search = () => {
             <div>Sort by</div>
             <div className="grid grid-cols-4 gap-4">
               <button
-                className={`${styles.sortButton}  `}
+                className={`${styles.sortButton} tooltip `}
                 onClick={() => handleSort("stars")}
               >
                 <FaStar
@@ -120,10 +120,13 @@ const Search = () => {
                       : ""
                   }`}
                 />
+                <div className={`tooltipBox`}>
+                  <p className="tooltipText">Star count</p>
+                </div>
               </button>
 
               <button
-                className={`${styles.sortButton}`}
+                className={`${styles.sortButton} tooltip `}
                 onClick={() => handleSort("forks")}
               >
                 <GoRepoForked
@@ -133,10 +136,13 @@ const Search = () => {
                       : ""
                   }`}
                 />
+                <div className={`tooltipBox`}>
+                  <p className="tooltipText"> Fork count</p>
+                </div>
               </button>
 
               <button
-                className={`${styles.sortButton}`}
+                className={`${styles.sortButton} tooltip`}
                 onClick={() => handleSort("updated")}
               >
                 <GoHistory
@@ -146,12 +152,28 @@ const Search = () => {
                       : ""
                   }`}
                 />
+                <div className={`tooltipBox`}>
+                  <p className="tooltipText"> Last update</p>
+                </div>
               </button>
-              <button className={`${styles.sortButton}`} onClick={handleOrder}>
+              <button
+                className={`${styles.sortButton} tooltip`}
+                onClick={handleOrder}
+              >
                 {order === "desc" ? (
-                  <FaSortAmountDown />
+                  <>
+                    <FaSortAmountDown />
+                    <div className={`tooltipBox`}>
+                      <p className="tooltipText">Descending</p>
+                    </div>
+                  </>
                 ) : (
-                  <FaSortAmountUpAlt />
+                  <>
+                    <FaSortAmountUpAlt />
+                    <div className={`tooltipBox`}>
+                      <p className="tooltipText"> Ascending</p>
+                    </div>
+                  </>
                 )}
               </button>
             </div>

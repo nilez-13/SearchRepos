@@ -3,15 +3,17 @@ import { FaHome } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 
 import { clearSearch, selectStaus } from "../containers/Search/searchSlice";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const status = useSelector(selectStaus);
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleClear = () => {
     dispatch(clearSearch());
+    navigate("/");
   };
 
   function checkShow() {
@@ -26,7 +28,7 @@ const Header = () => {
 
   return checkShow() ? (
     <header
-      className={`sticky top-0 z-20   text-4xl flex justify-center cursor-pointer ${
+      className={`sticky top-0 z-20 text-2xl md:text-3xl lg:text-4xl flex justify-center cursor-pointer ${
         location.pathname.includes("detail") ? "bg-black border-b-2" : ""
       }`}
       onClick={handleClear}

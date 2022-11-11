@@ -7,3 +7,31 @@ body {
   background-color: black;
   color: white;
 }
+
+.tooltip {
+  @apply inline-block relative;
+}
+.tooltipBox {
+  @apply bg-white absolute z-20 py-1 px-2 w-40 text-center border border-gray-500 rounded transition-all ease-in-out opacity-0 invisible;
+  @apply left-1/2 -translate-x-1/2 -translate-y-2;
+  bottom: calc(100% + 10px);
+}
+.tooltipText {
+  @apply text-sm text-gray-700;
+}
+
+.tooltipBox:before,
+.tooltipBox:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: #ffffff;
+}
+
+.tooltip:hover .tooltipBox {
+  visibility: visible;
+  opacity: 1;
+}

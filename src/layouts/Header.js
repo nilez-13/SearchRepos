@@ -50,7 +50,7 @@ const Header = () => {
           GitHub Repo Search
         </span>
       </div>
-      {checkFound() && <Filter search="node" />}
+      {checkFound() && <Filter />}
     </header>
   ) : null;
 };

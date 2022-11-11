@@ -144,7 +144,7 @@ const Filter = ({}) => {
   );
 
   return (
-    <div className={`flex items-end z-10 py-2 ${styles.sticky}`}>
+    <div className={`flex items-end z-10 py-2`}>
       {width > 1059 ? (
         <div className="mt-2 mx-4 flex items-end justify-start gap-4">
           {buttons}

@@ -12,9 +12,12 @@ body {
   @apply inline-block relative;
 }
 .tooltipBox {
-  @apply bg-white absolute z-20 py-1 px-2 w-40 text-center border border-gray-500 rounded transition-all ease-in-out opacity-0 invisible;
-  @apply left-1/2 -translate-x-1/2 -translate-y-2;
-  bottom: calc(100% + 10px);
+  @apply bg-white absolute z-20 py-1 px-1 w-40 text-center border border-gray-500 rounded transition-all ease-in-out opacity-0 invisible;
+  /* @apply left-1/2 -translate-x-1/2 translate-y-2; */
+  @apply right-4 top-1/2 -translate-y-2 -translate-x-2;
+
+  top: calc(100% + 10px);
+  right: calc(5% + 1px);
 }
 .tooltipText {
   @apply text-sm text-gray-700;

@@ -49,6 +49,12 @@ const Filter = ({}) => {
     dispatch(setPage(value));
   };
 
+  function shorten(value) {
+    let short = (value / 1000).toFixed(2);
+
+    return short;
+  }
+
   return (
     <div className="border-2 rounded mt-10 ">
       <div className="flex justify-between items-center">
@@ -66,8 +72,7 @@ const Filter = ({}) => {
               </option>
             ))}
           </select>
-          <span className="text-xs">entries</span>
-          <div className="ml-2 flex items-center">
+          <div className="flex items-center">
             <span
               onClick={() => {
                 if (1 === page) {
@@ -94,7 +99,7 @@ const Filter = ({}) => {
                 Math.ceil(repos.total_count / size) === page
                   ? "opacity-25 pointer-events-none"
                   : "hover:bg-primary hover:text-white"
-              } w-8 h-8 rounded cursor-pointer inline-flex items-center justify-center ml-1`}
+              } w-8 h-8 rounded cursor-pointer inline-flex items-center justify-center`}
             >
               <FaChevronRight />
             </span>
@@ -104,7 +109,12 @@ const Filter = ({}) => {
         <div>
           <span className="mr-5 text-xs">
             Page {page} of {Math.ceil(repos.total_count / size)}
-            <span className="pl-4">Total Data : {repos.total_count}</span>
+            <span className="pl-4">
+              Total Data :{" "}
+              {repos.total_count > 9999
+                ? `${shorten(repos.total_count)} K`
+                : repos.total_count}
+            </span>
           </span>
         </div>
       </div>

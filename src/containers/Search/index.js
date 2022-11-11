@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { FaSearch } from "react-icons/fa";
 
@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Card from "./Card";
 import Loader from "./Skeleton";
-import Filter from "./Filter";
 
 import {
   loadRepos,

@@ -1,9 +1,74 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  loadDetail,
+  clearDetail,
+  selectData,
+  selectLoading,
+  selectStaus,
+} from "./detailSlice";
+import { FaLink } from "react-icons/fa";
+
+import styles from "./detail.module.css";
+
 const Detail = () => {
+  const { user, repo } = useParams();
+
+  const dispatch = useDispatch();
+
+  const data = useSelector(selectData);
+  const loading = useSelector(selectLoading);
+  const status = useSelector(selectStaus);
+
+  useEffect(() => {
+    dispatch(loadDetail({ user, repo }));
+  }, [user, repo]);
+
   return (
-    <div className="grid grid-cols-2 gap-4">
-      {[1, 2, 3, 4].map((each) => (
-        <div className="p-20 text-xl bg-gray-400 rounded">{each}</div>
-      ))}
+    <div className="mt-10 px-4">
+      <div className="text-4xl font-bold border-b my-2">{data?.full_name}</div>
+      <table className={styles.table}>
+        <tr>
+          <th>Repo Name</th>
+          <td>
+            <a
+              href={data.html_url}
+              target="_blank"
+              className="flex flex-wrap gap-2 items-end"
+              rel="noreferrer"
+            >
+              <FaLink className="text-blue-800" /> {data?.name}
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <th>Owner Name</th>
+          <td>
+            <a
+              href={data.owner.html_url}
+              target="_blank"
+              className="flex flex-wrap gap-2 items-end"
+              rel="noreferrer"
+            >
+              <FaLink className="text-blue-800" /> {data?.owner.login}
+            </a>
+          </td>
+        </tr>
+
+        <tr>
+          <th>Open issues</th>
+          <td>{data?.open_issues_count}</td>
+        </tr>
+        <tr>
+          <th>Default Branch</th>
+          <td>{data?.default_branch}</td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td>{data?.description}</td>
+        </tr>
+      </table>
     </div>
   );
 };

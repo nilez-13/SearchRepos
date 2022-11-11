@@ -161,7 +161,7 @@ const Search = () => {
 
       {!loading ? (
         <>
-          {status === "notfound" ? (
+          {status === "notfound" && (
             <div className="flex justify-center mt-10">
               <div className={styles.warningbox}>
                 <p>No Repo found with with search term</p>
@@ -174,7 +174,8 @@ const Search = () => {
                 </p>
               </div>
             </div>
-          ) : (
+          )}
+          {status === "found" && (
             <>
               <div
                 className={`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-4 mt-10`}

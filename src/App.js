@@ -15,8 +15,8 @@ function App() {
         <Header />
         <div className="relative my-10 px-4">
           <Routes>
-            <Route path="*" element={<Search />} />
-            <Route path="/detail" element={<Detail />} />
+            <Route exact path="/" element={<Search />} />
+            <Route exact path="/detail/:user/:repo" element={<Detail />} />
           </Routes>
         </div>
 

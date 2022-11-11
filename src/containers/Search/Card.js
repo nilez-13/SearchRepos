@@ -8,7 +8,7 @@ import moment from "moment";
 const Card = ({ data }) => {
   return (
     <Link to={`/detail/${data.owner.login}/${data.name}`}>
-      <div className="text-xl bg-gray-600  rounded  px-2 pt-4">
+      <div className="text-xl bg-gray-600  rounded  px-2 pt-4 pb-1">
         <div className="flex justify-between border-b-2">
           <span className="font-bold text-xl truncate hover:text-clip">
             {data.name}

@@ -10,7 +10,6 @@ import Loader from "./Skeleton";
 import {
   loadRepos,
   selectData,
-  selectRepos,
   selectLoading,
   selectStaus,
   clearSearch,
@@ -19,10 +18,10 @@ import {
 } from "./searchSlice";
 
 import styles from "./search.module.css";
+import Pagination from "./Pagination";
 
 const Search = () => {
   const data = useSelector(selectData);
-  const repos = useSelector(selectRepos);
   const loading = useSelector(selectLoading);
   const status = useSelector(selectStaus);
   const dispatch = useDispatch();
@@ -101,7 +100,7 @@ const Search = () => {
                   <Card data={each} key={each.id} />
                 ))}
               </div>
-              <div className="border-2 rounded mt-10 h-10">Pagination</div>
+              <Pagination />
             </>
           )}
         </>

@@ -8,7 +8,18 @@ import {
 import { GoRepoForked, GoHistory } from "react-icons/go";
 
 import { useDispatch, useSelector } from "react-redux";
-import { filterRepos, selectTerm } from "./searchSlice";
+import {
+  filterRepos,
+  selectTerm,
+  setOrder,
+  setSize,
+  setPage,
+  setSort,
+  selectSize,
+  selectOrder,
+  selectPage,
+  selectSort,
+} from "./searchSlice";
 
 import styles from "./search.module.css";
 import getWindowDimensions from "../../features/windowSize";
@@ -16,33 +27,44 @@ import getWindowDimensions from "../../features/windowSize";
 const Filter = ({}) => {
   const { width } = getWindowDimensions();
 
-  const [sort, setSort] = useState("stars");
-  const [order, setOrder] = useState("desc");
-  const [show, setShow] = useState(false);
+  const sort = useSelector(selectSort);
+  const order = useSelector(selectOrder);
+  const page = useSelector(selectPage);
+  const size = useSelector(selectSize);
   const search = useSelector(selectTerm);
+
+  const [show, setShow] = useState(false);
+  const [firstLoad, setFirstLoad] = useState(true);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (search.trim() !== "") {
-      dispatch(filterRepos({ search, sort, order }));
+    if (!firstLoad) {
+      if (search.trim() !== "") {
+        dispatch(filterRepos({ search, sort, order, page, size }));
+      }
     }
   }, [sort, order]);
 
   const handleSort = (value) => {
-    setSort(value);
+    setFirstLoad(false);
+    dispatch(setPage(1));
+    dispatch(setSize(30));
+    dispatch(setSort(value));
   };
 
   const handleOrder = () => {
+    setFirstLoad(false);
+    dispatch(setPage(1));
+    dispatch(setSize(30));
     if (order === "desc") {
-      setOrder("asc");
+      dispatch(setOrder("asc"));
     } else {
-      setOrder("desc");
+      dispatch(setOrder("desc"));
     }
   };
 
   const handleShow = () => {
-    console.log("here");
     setShow(!show);
   };
 

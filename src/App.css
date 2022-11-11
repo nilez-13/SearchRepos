@@ -35,3 +35,22 @@ body {
   visibility: visible;
   opacity: 1;
 }
+
+.inputbox {
+  display: block;
+  width: 100%;
+  height: 36px;
+  padding: 6px 12px;
+  background: #3a3a3a;
+  border: 1px solid #dfdfdf;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+.inputbox:focus {
+  outline: 0;
+}
+
+select.inputbox {
+  position: relative;
+  height: 36px;
+}

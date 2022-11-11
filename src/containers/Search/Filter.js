@@ -7,18 +7,19 @@ import {
 } from "react-icons/fa";
 import { GoRepoForked, GoHistory } from "react-icons/go";
 
-import { useDispatch } from "react-redux";
-import { filterRepos } from "./searchSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { filterRepos, selectTerm } from "./searchSlice";
 
 import styles from "./search.module.css";
 import getWindowDimensions from "../../features/windowSize";
 
-const Filter = ({ search }) => {
+const Filter = ({}) => {
   const { width } = getWindowDimensions();
 
   const [sort, setSort] = useState("stars");
   const [order, setOrder] = useState("desc");
   const [show, setShow] = useState(false);
+  const search = useSelector(selectTerm);
 
   const dispatch = useDispatch();
 

@@ -15,6 +15,8 @@ import {
   selectLoading,
   selectStaus,
   clearSearch,
+  selectTerm,
+  setTerm,
 } from "./searchSlice";
 
 import styles from "./search.module.css";
@@ -25,22 +27,21 @@ const Search = () => {
   const loading = useSelector(selectLoading);
   const status = useSelector(selectStaus);
   const dispatch = useDispatch();
-
-  const [search, setSearch] = useState("");
+  const term = useSelector(selectTerm);
 
   const handleSearch = (event) => {
     event.preventDefault();
-    if (search.trim() !== "") {
-      dispatch(loadRepos({ search }));
+    if (term.trim() !== "") {
+      dispatch(loadRepos({ term }));
     }
   };
 
   const handleChange = (event) => {
-    setSearch(event.target.value);
+    dispatch(setTerm(event.target.value));
   };
 
   const handleClear = () => {
-    setSearch("");
+    dispatch(setTerm(""));
     dispatch(clearSearch());
   };
 
@@ -65,7 +66,7 @@ const Search = () => {
                 placeholder="Search by Repo names ..."
                 required
                 autoFocus
-                value={search}
+                value={term}
                 onChange={handleChange}
               />
               <button onClick={handleSearch} className={styles.searchbutton}>
@@ -75,8 +76,6 @@ const Search = () => {
           </form>
         </div>
       </div>
-
-      {/* {status === "found" && <Filter search={search} />} */}
 
       {!loading ? (
         <>

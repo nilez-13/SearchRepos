@@ -6,13 +6,14 @@ const initialState = {
   },
   status: "idle",
   loading: false,
+  term: "",
 };
 
 export const loadRepos = createAsyncThunk(
   "search/fetchRepos",
   async (value) => {
-    const { search } = value;
-    const url = `https://api.github.com/search/repositories?q=${search}+in:name`;
+    const { term } = value;
+    const url = `https://api.github.com/search/repositories?q=${term}+in:name`;
     const options = {
       method: "GET",
     };
@@ -53,10 +54,13 @@ export const searchSlice = createSlice({
       state.repos = { items: [] };
       state.status = "idle";
     },
+    setTerm: (state, action) => {
+      state.term = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loadRepos.pending, (state) => {
+      .addCase(loadRepos.pending, (state, action) => {
         state.status = "loading";
         state.loading = true;
       })
@@ -83,11 +87,12 @@ export const searchSlice = createSlice({
   },
 });
 
-export const { clearSearch } = searchSlice.actions;
+export const { clearSearch, setTerm } = searchSlice.actions;
 
 export const selectData = (state) => state.search.repos.items;
 export const selectRepos = (state) => state.search.repos;
 export const selectStaus = (state) => state.search.status;
 export const selectLoading = (state) => state.search.loading;
+export const selectTerm = (state) => state.search.term;
 
 export default searchSlice.reducer;

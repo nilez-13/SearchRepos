@@ -76,7 +76,7 @@ const Search = () => {
         </div>
       </div>
 
-      {status === "found" && <Filter search={search} />}
+      {/* {status === "found" && <Filter search={search} />} */}
 
       {!loading ? (
         <>

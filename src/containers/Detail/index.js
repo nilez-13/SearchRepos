@@ -33,7 +33,7 @@ const Detail = () => {
           <th>Repo Name</th>
           <td>
             <a
-              href={data.html_url}
+              href={data?.html_url}
               target="_blank"
               className="flex flex-wrap gap-2 items-end"
               rel="noreferrer"
@@ -46,12 +46,12 @@ const Detail = () => {
           <th>Owner Name</th>
           <td>
             <a
-              href={data.owner.html_url}
+              href={data?.owner?.html_url}
               target="_blank"
               className="flex flex-wrap gap-2 items-end"
               rel="noreferrer"
             >
-              <FaLink className="text-blue-800" /> {data?.owner.login}
+              <FaLink className="text-blue-800" /> {data?.owner?.login}
             </a>
           </td>
         </tr>

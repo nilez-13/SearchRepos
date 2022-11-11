@@ -1,5 +1,36 @@
-import React, { memo } from "react";
-const Filter = ({}) => {
+import React, { memo, useEffect, useState } from "react";
+import { FaSortAmountDown, FaSortAmountUpAlt, FaStar } from "react-icons/fa";
+import { GoRepoForked, GoHistory } from "react-icons/go";
+
+import { useDispatch } from "react-redux";
+import { filterRepos } from "./searchSlice";
+
+import styles from "./search.module.css";
+
+const Filter = ({ search }) => {
+  const [sort, setSort] = useState("stars");
+  const [order, setOrder] = useState("desc");
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (search.trim() !== "") {
+      dispatch(filterRepos({ search, sort, order }));
+    }
+  }, [sort, order]);
+
+  const handleSort = (value) => {
+    setSort(value);
+  };
+
+  const handleOrder = () => {
+    if (order === "desc") {
+      setOrder("asc");
+    } else {
+      setOrder("desc");
+    }
+  };
+
   return (
     <div
       className={`bg-black border-b-2 flex items-end z-10 py-2 ${styles.sticky}`}

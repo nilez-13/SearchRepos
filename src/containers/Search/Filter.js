@@ -24,6 +24,8 @@ import {
 import styles from "./search.module.css";
 import getWindowDimensions from "../../features/windowSize";
 
+import DropdownMenu from "../../features/dropdown";
+
 const Filter = ({}) => {
   const { width } = getWindowDimensions();
 
@@ -51,6 +53,7 @@ const Filter = ({}) => {
     dispatch(setPage(1));
     dispatch(setSize(30));
     dispatch(setSort(value));
+    setShow(false);
   };
 
   const handleOrder = () => {
@@ -70,8 +73,8 @@ const Filter = ({}) => {
 
   const buttons = (
     <>
-      <div>Sort by</div>
-      <div className="grid grid-cols-4 gap-2 lg:gap-4">
+      <div className={`${show ? "flex justify-end" : ""} `}>Sort by</div>
+      <div className="flex justify-end gap-2 lg:gap-4">
         <button
           className={`${styles.sortButton} tooltip `}
           onClick={() => handleSort("stars")}
@@ -145,24 +148,30 @@ const Filter = ({}) => {
 
   return (
     <div className={`flex items-end z-10 py-2`}>
-      {width > 1059 ? (
+      {width > 570 ? (
         <div className="mt-2 mx-4 flex items-end justify-start gap-4">
           {buttons}
         </div>
       ) : (
         <div className="mt-2 mr-4 z-40">
-          <div className="w-full flex justify-end">
-            <button
-              className={`rounded bg-gray-600 p-2 tooltip text-md cursor-pointer `}
-              onClick={handleShow}
-            >
-              <FaSlidersH className={`${show ? "text-blue-400" : ""}`} />
-              <div className={`tooltipBox`}>
-                <p className="tooltipText"> Filters</p>
+          <DropdownMenu
+            main={
+              <div className="w-full flex justify-end">
+                <button
+                  className={`rounded bg-gray-600 p-2 tooltip text-md cursor-pointer `}
+                  onClick={handleShow}
+                >
+                  <FaSlidersH className={`${show ? "text-blue-400" : ""}`} />
+                  {/* <div className={`tooltipBox`}>
+                    <p className="tooltipText"> Filters</p>
+                  </div> */}
+                </button>
               </div>
-            </button>
-          </div>
-          {show && <div className="w-full mt-2">{buttons}</div>}
+            }
+            items={<div className="w-full">{buttons}</div>}
+            show={show}
+            setShow={setShow}
+          />
         </div>
       )}
     </div>

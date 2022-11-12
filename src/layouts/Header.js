@@ -37,9 +37,9 @@ const Header = () => {
 
   return checkShow() ? (
     <header
-      className={`sticky top-0 z-20  flex  justify-between bg-black border-b-2 `}
+      className={`sticky top-0 z-20  flex items-end justify-between bg-black border-b-2 `}
     >
-      <div className="flex flex-wrap">
+      <div className="flex ">
         <span className="  ml-2 px-2 py-2 cursor-pointer text-2xl md:text-3xl lg:text-4xl">
           <FaHome className="mt-1" onClick={handleClear} />
         </span>

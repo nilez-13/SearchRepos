@@ -10,13 +10,13 @@ const Loader = () => {
 
       <table className={styles.table}>
         <tr>
-          <th>Repo Name</th>
+          <th>Owner Name</th>
           <td>
             <Skeleton />
           </td>
         </tr>
         <tr>
-          <th>Owner Name</th>
+          <th>Repo Name</th>
           <td>
             <Skeleton />
           </td>

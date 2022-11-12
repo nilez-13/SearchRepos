@@ -18,7 +18,7 @@
 }
 
 .warningbox {
-  @apply border rounded border-red-600 w-1/2 py-2 bg-red-400 text-gray-800 text-lg font-bold text-center;
+  @apply border rounded border-red-500 w-1/2 py-2  text-red-500 text-lg font-bold text-center;
 }
 
 .sortButton {

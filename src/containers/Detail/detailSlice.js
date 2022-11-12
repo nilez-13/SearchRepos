@@ -6,20 +6,30 @@ const initialState = {
   loading: false,
 };
 
-export const loadDetail = createAsyncThunk("detail/getRepo", async (value) => {
-  const { user, repo } = value;
-  const url = `https://api.github.com/repos/${user}/${repo}`;
-  const options = {
-    method: "GET",
-  };
-  const response = await fetch(url, options);
-  if (response.ok) {
-    const data = await response.json();
-    return data;
-  } else {
-    return;
+export const loadDetail = createAsyncThunk(
+  "detail/getRepo",
+  async (value, { rejectWithValue }) => {
+    const { user, repo } = value;
+    const url = `https://api.github.com/repos/${user}/${repo}`;
+    const options = {
+      method: "GET",
+    };
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        return rejectWithValue("api error");
+      }
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return rejectWithValue(err.response.data);
+    }
   }
-});
+);
 
 export const detailSlice = createSlice({
   name: "detail",

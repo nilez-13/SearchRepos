@@ -17,3 +17,7 @@
 .table.table-border td {
   @apply px-4 py-2 border;
 }
+
+.warningbox {
+  @apply border rounded border-red-500 w-1/2 py-2  text-red-500 text-lg font-bold text-center;
+}

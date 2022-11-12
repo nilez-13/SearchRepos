@@ -91,6 +91,21 @@ const Search = () => {
               </div>
             </div>
           )}
+
+          {status === "failed" && (
+            <div className="flex justify-center mt-10">
+              <div className={styles.warningbox}>
+                <p>Request Failed</p>
+
+                <p
+                  className="underline cursor-pointer text-white text-xs"
+                  onClick={handleClear}
+                >
+                  Clear Search
+                </p>
+              </div>
+            </div>
+          )}
           {status === "found" && (
             <>
               <div

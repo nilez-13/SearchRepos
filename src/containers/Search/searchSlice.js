@@ -15,7 +15,7 @@ const initialState = {
 
 export const loadRepos = createAsyncThunk(
   "search/fetchRepos",
-  async (value) => {
+  async (value, { rejectWithValue }) => {
     const { term } = value;
     const url = `https://api.github.com/search/repositories?q=${term}+in:name`;
     const options = {
@@ -27,28 +27,38 @@ export const loadRepos = createAsyncThunk(
         const data = await response.json();
         return data;
       } else {
-        return;
+        return rejectWithValue("api error");
       }
     } catch (err) {
-      console.log(err);
+      if (!err.response) {
+        throw err;
+      }
+      return rejectWithValue(err.response.data);
     }
   }
 );
 
 export const filterRepos = createAsyncThunk(
   "search/filterRepos",
-  async (value) => {
+  async (value, { rejectWithValue }) => {
     const { search, sort, order, page, size } = value;
     const url = `https://api.github.com/search/repositories?q=${search}+in:name&sort=${sort}&order=${order}&page=${page}&per_page=${size}`;
     const options = {
       method: "GET",
     };
-    const response = await fetch(url, options);
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      return;
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        return rejectWithValue("api error");
+      }
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -90,7 +100,7 @@ export const searchSlice = createSlice({
         state.repos = action.payload ? action.payload : { items: [] };
       })
       .addCase(loadRepos.rejected, (state) => {
-        state.status = "idle";
+        state.status = "failed";
         state.loading = false;
       })
 

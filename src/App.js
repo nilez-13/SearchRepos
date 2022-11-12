@@ -4,7 +4,6 @@ import Header from "./layouts/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Search from "./containers/Search";
 import Detail from "./containers/Detail";
-import Footer from "./layouts/Footer";
 
 function App() {
   return (
@@ -17,8 +16,6 @@ function App() {
             <Route exact path="/detail/:user/:repo" element={<Detail />} />
           </Routes>
         </div>
-
-        {/* <Footer /> */}
       </div>
     </Router>
   );

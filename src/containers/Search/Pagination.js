@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
-import { FaChevronLeft, FaChevronRight, FaSearch } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,12 +14,7 @@ import {
   selectRepos,
 } from "./searchSlice";
 
-import styles from "./search.module.css";
-import getWindowDimensions from "../../features/windowSize";
-
 const Filter = ({}) => {
-  const { width } = getWindowDimensions();
-
   const repos = useSelector(selectRepos);
   const sort = useSelector(selectSort);
   const order = useSelector(selectOrder);

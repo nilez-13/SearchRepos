@@ -162,9 +162,6 @@ const Filter = ({}) => {
                   onClick={handleShow}
                 >
                   <FaSlidersH className={`${show ? "text-blue-400" : ""}`} />
-                  {/* <div className={`tooltipBox`}>
-                    <p className="tooltipText"> Filters</p>
-                  </div> */}
                 </button>
               </div>
             }

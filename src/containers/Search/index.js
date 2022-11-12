@@ -61,7 +61,7 @@ const Search = () => {
                 type="search"
                 id="default-search"
                 className={styles.searchbar}
-                placeholder="Search by Repo names ..."
+                placeholder="Search by Repository names"
                 required
                 autoFocus
                 value={term}

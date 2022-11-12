@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FaSearch } from "react-icons/fa";
+import { FaCross, FaSearch, FaTimesCircle } from "react-icons/fa";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -108,8 +108,20 @@ const Search = () => {
           )}
           {status === "found" && (
             <>
+              <div className="flex justify-between px-2 -mt-6 text-sm">
+                <div>
+                  Results for term <span className="font-bold"> "{term}"</span>.
+                </div>
+                <div
+                  className="underline cursor-pointer flex items-center gap-2"
+                  onClick={handleClear}
+                >
+                  <FaTimesCircle />
+                  Clear Search
+                </div>
+              </div>
               <div
-                className={`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-4 mt-10`}
+                className={`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-4 mt-8`}
               >
                 {data.map((each) => (
                   <Card data={each} key={each.id} />
